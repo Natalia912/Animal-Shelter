@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_sections_hero1s",
+  "info": {
+    "displayName": "Hero1",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "HomeHeroImage": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.hero-image"
+    }
+  }
+}
