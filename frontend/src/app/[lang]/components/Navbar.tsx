@@ -2,6 +2,9 @@
 import Logo from "./Logo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import LocaleSwitcher from "./LocaleSwitcher";
+
+//Links: Adopt a pet (Приютить питомца), Events (События), How to help (Как помочь приюту), About us (О приюте), Donate (Сделать пожертвование)
 
 interface NavLink {
   id: number;
@@ -37,7 +40,7 @@ export default function Navbar({
   logoText: string | null;
 }) {
   return (
-    <div className="p-4 dark:bg-black dark:text-gray-100">
+    <div className="p-4 bg-white fixed">
       <div className="container flex justify-between h-16 mx-auto px-0 sm:px-6">
         <Logo src={logoUrl}>
           {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
@@ -48,6 +51,9 @@ export default function Navbar({
             {links.map((item: NavLink) => (
               <NavLink key={item.id} {...item} />
             ))}
+            <li>
+              <LocaleSwitcher />
+            </li>
           </ul>
         </div>
 

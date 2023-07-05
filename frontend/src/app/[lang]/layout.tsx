@@ -14,7 +14,7 @@ const FALLBACK_SEO = {
 }
 
 
-async function getGlobal(): Promise<any> {
+async function getGlobal(lang: string): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 
   if (!token) throw new Error("The Strapi API Token environment variable is not set.");
@@ -35,14 +35,16 @@ async function getGlobal(): Promise<any> {
       "footer.socialLinks",
       "footer.categories",
     ],
+    locale: lang
   };
 
   const response = await fetchAPI(path, urlParamsObject, options);
   return response;
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const meta = await getGlobal();
+export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
+  
+  const meta = await getGlobal(params.lang);
 
   if (!meta.data) return FALLBACK_SEO;
 
@@ -65,7 +67,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { lang: string };
 }) {
-  const global = await getGlobal();
+  const global = await getGlobal(params.lang);
   // TODO: CREATE A CUSTOM ERROR PAGE
   if (!global.data) return null;
   

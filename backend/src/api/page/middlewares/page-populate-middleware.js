@@ -34,6 +34,15 @@ const populate = {
       submitButton: {
         populate: true,
       },
+      heroHomeImage: {
+        populate: {
+          image: {
+            fields: ["url", "alternativeText", "caption", "width", "height"],
+          },
+          isHomePage: true,
+          alt: true
+        }
+      }
     },
   },
 };
